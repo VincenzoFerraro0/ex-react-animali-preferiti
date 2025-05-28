@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I miei animali Preferiti</title>
     <link rel="stylesheet" href="style.css">
-        <!-- React -->
+    <!-- React -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <!-- ReactDom -->
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -17,33 +17,34 @@
     <!-- components -->
     <script type="text/babel">
 
-        const animals = [
-            "Axolotl",             // Anfibio che rimane in uno stato larvale per tutta la vita
-            "Narvalo",             // Cetaceo con un lungo dente simile a un corno (unicorno del mare)
-            "Aye-Aye",             // Primato del Madagascar con un dito lungo usato per cercare insetti nel legno
-            "Okapi",               // Sembra una fusione tra giraffa e zebra, ma è parente della giraffa
-            "Tarsio",              // Piccolo primate con enormi occhi, specializzato nella caccia notturna
-            "Squalo goblin",       // Squalo dall'aspetto preistorico con un muso prominente
-            "Granchio yeti",       // Crostaceo scoperto recentemente con chele coperte di peli bianchi
-            "Tenrec striato",      // Mammifero malgascio simile a un riccio, ma con comportamenti unici
-            "Pesce mano rosa",     // Pesce che cammina sui fondali con pinne simili a mani
-            "Formichiere gigante"  // Mammifero con una lingua lunghissima e una dieta esclusiva di insetti
-        ];
+        const { useState } = React;
 
         const AnimalsList = () => {
+            const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+            const [animals, setAnimals] = useState([]);
+            
+            const addAnimal = () => {
+               const randomIndex = Math.floor(Math.random() * animalsChoices.length);
+               const randomAnimal = animalsChoices[randomIndex]
+               setAnimals(curr => [...curr, randomAnimal])
+               
+            }
             return (
-                <details>
-                    <summary>Animali</summary>
-                    <ul>
-                        {
-                            animals.map((animal, index) => {
-                                return (
-                                    <li key={index}>{animal}</li>
-                                )
-                            })
-                        }
-                    </ul>
-                </details>
+                <>
+                    <button onClick={addAnimal}>Aggiungi Animale</button>
+                    <details>
+                        <summary>Animali</summary>
+                        <ul>
+                            {
+                                animals.map((animal, index) => {
+                                    return (
+                                        <li key={index}>{animal}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </details>
+                </>
             )
         }
 
